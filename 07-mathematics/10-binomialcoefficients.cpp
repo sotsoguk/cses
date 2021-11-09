@@ -25,7 +25,7 @@ long fact_mod(long n, long k, long mod, const vector<long> &facs,const vector<lo
     num = facs[n];
     denom = (facs[k] * facs[n-k]) % mod;
     // return (num * expmod(denom,mod-2,mod) % mod);
-    return (num*invs[denom]%mod);
+    
 }
 int main()
 {

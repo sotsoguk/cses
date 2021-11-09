@@ -10,6 +10,7 @@ void matches(int root, int parent, vector<bool> &used, int &num_edges)
         // cout << root <<":"<<c<<endl;
         if (c == parent)
             continue;
+        // ! DFS has to occur BEFORE marking edges
         matches(c, root, used, num_edges);
         if (used[root] == false && used[c] == false)
         {
@@ -19,15 +20,7 @@ void matches(int root, int parent, vector<bool> &used, int &num_edges)
         }
     }
 }
-/**
- * 
- * ! kfkf
- * ? Why
- * @param
- * * IMPORTANT
- * 
- * 
-**/
+
 int main()
 {
     ios::sync_with_stdio(0);

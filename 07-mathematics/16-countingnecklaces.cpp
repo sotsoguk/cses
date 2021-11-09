@@ -23,6 +23,7 @@ int main()
     long n,m;
     long mod = 1e9+7;
     cin >> n >> m;
+    // Burnsides Lemma
     long result(0);
     for (long i=0;i<n;i++) {
         result += expmod(m,__gcd(i,n),mod);
