@@ -25,24 +25,25 @@ int dfs(int root, int par,vector<vector<int>> &adj, vector<int> &cycle, vector<b
 void dijkstra(int root, vector<vector<pair<int,int>>> &adj, vector<bool> &visited,
                 vector<long> &lens) {
     // cout << "# "<<root << endl;
-    visited[root] = true;
     
-    long nextNode = 0;
-    long minNext = LONG_MAX;
-    for (auto c:adj[root]){
-        
-        
-        if (!visited[c.first]){
-            // cout <<"! " << c.first << endl;
-            lens[c.first] = min(lens[c.first], lens[root] + c.second);
-            if (lens[c.first] < minNext) {
-                minNext = lens[c.first];
-                nextNode = c.first;
+    
+    priority_queue<pair<long,int>, vector<pair<long,int>>, greater<pair<long,int>>> q;
+    // q.push({root,0});
+    q.push({0,root});
+    while (!q.empty()){
+        auto node = q.top().second;q.pop();
+        // cout << "#Node: " << node<<endl;
+        if (visited[node]) continue;
+        visited[node] = true;
+        for (auto [b,c] : adj[node]){
+            if (lens[b] > lens[node] + c) {
+                lens[b] = lens[node] + c;
+                // q.push({b, lens[b]});
+                q.push({lens[b],b});
             }
         }
-        // cout << c.first <<"," << c.second <<","<<minNext<<" -> "<<nextNode <<endl;
     }
-    if (nextNode >0 ) dijkstra(nextNode, adj, visited, lens);
+    
 }
 int main()
 {
